@@ -59,6 +59,13 @@ public class GestionDaoImpl implements GestionDao {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public List<Gestion> getReservationDispo(){
+		return currentSession().createQuery("from Gestion where nmbr_places>0", Gestion.class).list();
+
+	
+	}
+
 
 	
 }

@@ -12,4 +12,5 @@ public interface GestionService {
 	public List<Gestion> getReserverWeek();
 	public List<Gestion> getReserverProchain();
 	public List<Gestion> getReserverProchainUser(Utilisateur user);
+	public List<Gestion> getReservationDispo();
 }

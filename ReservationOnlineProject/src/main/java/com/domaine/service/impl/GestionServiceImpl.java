@@ -39,6 +39,13 @@ public class GestionServiceImpl implements GestionService {
 	
 	@Transactional
 	@Override
+	public List<Gestion> getReservationDispo() {
+		return gestionDao.getReservationDispo();
+	}
+	
+	
+	@Transactional
+	@Override
 	public List<Gestion> getReserverWeek() {
 		return gestionDao.getReserverWeek();
 	}

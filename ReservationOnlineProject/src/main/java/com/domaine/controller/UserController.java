@@ -33,23 +33,43 @@ public class UserController {
 	@Autowired
 	ReservationService reservationService;
 	
-	@RequestMapping("/demandesAcces")
-	public String demandesAcces(Model model, HttpSession httpSession) {
-		System.out.println(gestionService.getReserverProchainUser((Utilisateur)httpSession.getAttribute("logged")).size());
-		model.addAttribute("listReserver", gestionService.getReserverProchainUser((Utilisateur)httpSession.getAttribute("logged")));
-		model.addAttribute("listDemande", reservationService.getByUtilisateur((Utilisateur)httpSession.getAttribute("logged")));
-		return "user/demandesAcces";
-	}
+//	@RequestMapping("/demandesAcces")
+//	public String demandesAcces(Model model, HttpSession httpSession) {
+//		System.out.println(gestionService.getReserverProchainUser((Utilisateur)httpSession.getAttribute("logged")).size());
+//		model.addAttribute("listReserver", gestionService.getReserverProchainUser((Utilisateur)httpSession.getAttribute("logged")));
+//		model.addAttribute("listDemande", reservationService.getByUtilisateur((Utilisateur)httpSession.getAttribute("logged")));
+//		return "user/demandesAcces";
+//	}
 	
 	//demande d'inscription
-	@RequestMapping(value="/demandesAcces", method = RequestMethod.POST)
-	public void AjouterdemandesAcces(Model model, HttpSession httpSession, @RequestParam(name = "id_gest") Long id_gest) {
+//	@RequestMapping(value="/demandeAcces", method = RequestMethod.POST)
+//	public void AjouterdemandesAcces(Model model, HttpSession httpSession, @RequestParam(name = "id_gest") Long id_gest) {
+//		Utilisateur user = (Utilisateur)httpSession.getAttribute("logged");
+//		Gestion gestion= gestionService.find(id_gest);
+//		//System.out.println(gestion.getNombrePlace());
+//		reservationService.create(new Reservation(new ReservationId(user, gestion), null, 0));
+//		model.addAttribute("succes", "La demande d'accès est envoyé avec succés");
+////		demandesAcces(model, httpSession);
+//
+//	}
+
+	@RequestMapping(value = "/demandeAcces", method = RequestMethod.POST)
+	public String AjouterdemandesAcces(Model model, HttpSession httpSession, @RequestParam(name = "id_gest") Long id_gest) {
 		Utilisateur user = (Utilisateur)httpSession.getAttribute("logged");
 		Gestion gestion= gestionService.find(id_gest);
-		//System.out.println(gestion.getNombrePlace());
 		reservationService.create(new Reservation(new ReservationId(user, gestion), null, 0));
-		model.addAttribute("succes", "l'ajout de demande d'acc�s est termin� avec succ�s");
-		demandesAcces(model, httpSession);
+		model.addAttribute("succes", "La demande d'accès est envoyé avec succés");
+		return "redirect:/user/reservationenvoyee";
+
+		}
+	
+	
+	@RequestMapping("/reservationenvoyee")
+	public String reservationenvoyee(Model model) {
+		model.addAttribute("listReservationDispo", gestionService.getReservationDispo());
+		return "user/reservationenvoyee";
 	}
+	
+	
 	
 }

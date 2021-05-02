@@ -39,8 +39,14 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="nav navbar-nav ml-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="${pageContext.servletContext.contextPath}/"> Accueil <span class="sr-only">(current)</span></a>
+      </li>
       <li class="nav-item">
-      <button type="button" class="btn btn-outline-danger text-danger"><a class="nav-link" href="${pageContext.servletContext.contextPath}/deconnexion">Se déconnecter</a>
+        <a class="nav-link" href="${pageContext.servletContext.contextPath}/admin/demandeAcces">Reservation</a>
+      </li>
+      <li class="nav-item">
+      <button type="button" class="btn btn-outline-danger text-danger"><a class="nav-link" href="${pageContext.servletContext.contextPath}/admin/demandeAcces">S'inscrire</a>
       </button> 
         </li>
 
@@ -51,6 +57,12 @@
 
     <div class="container">
         <div class="row"><h2 class="text-danger"> Dates disponibles </h2>
+        
+         <div class="container" style="padding: 1%;">
+        <div class="text-success" role="alert" style="padding: 2%; ">
+            Votre demande d'accès est envoyé avec succés
+        </div>
+    </div>
    
         <table class="table">
             <tr>

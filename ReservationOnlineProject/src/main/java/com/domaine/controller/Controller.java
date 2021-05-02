@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.domaine.model.Utilisateur;
 import com.domaine.model.UtilisateurConnection;
+import com.domaine.service.GestionService;
 import com.domaine.service.UtilisateurService;
 
 
@@ -21,6 +22,9 @@ public class Controller {
 	
 	@Autowired
 	private UtilisateurService utilisateurService;
+	
+	@Autowired
+	private GestionService gestionService;
 
 	@GetMapping("/")
 	private String index() {
@@ -36,12 +40,12 @@ public class Controller {
 	public String inscriptionAprenant(Model model, @RequestParam(name = "nom") String nom ,@RequestParam(name = "email") String email, @RequestParam(name = "mdp") String mdp) {
 		Utilisateur user = utilisateurService.findByEmail(email);
 		if(user != null) {
-			model.addAttribute("erreur", "l'email existe déjà");
+			model.addAttribute("erreur", "l'email existe dï¿½jï¿½");
 		} else {
 			try {
 				Utilisateur utilisateur = new Utilisateur(nom, email, BCrypt.hashpw(mdp, BCrypt.gensalt()));
 				utilisateurService.create(utilisateur);
-				model.addAttribute("succes", "l'inscription est terminé avec succès");
+				model.addAttribute("succes", "l'inscription est terminï¿½ avec succï¿½s");
 				return "connexion";
 			} catch (Exception e) {
 				model.addAttribute("erreur", e);
@@ -64,10 +68,10 @@ public class Controller {
 				httpSession.setAttribute("logged", utilisateur);
 				return "redirect:/apprenant";
 			} else if (utilisateur.getActive() == 0) {
-				model.addAttribute("erreur", "Votre demande d'inscription n'a pas encore été acceptée");
+				model.addAttribute("erreur", "Votre demande d'inscription n'a pas encore ï¿½tï¿½ acceptï¿½e");
 				return "connexionAtt";
 			} else if (utilisateur.getActive() == 2) {
-				model.addAttribute("erreur", "Votre demande d'inscription a été rejetée");
+				model.addAttribute("erreur", "Votre demande d'inscription a ï¿½tï¿½ rejetï¿½e");
 				System.out.println("rejected");
 				return "connexionError";
 			}
@@ -84,18 +88,19 @@ public class Controller {
 	
 	@RequestMapping("/deconnexion")
 	public String deconnexion(HttpSession httpSession) {
-		httpSession.invalidate(); //déconnection de la session, vider la session
+		httpSession.invalidate(); //dï¿½connection de la session, vider la session
 		return "redirect:/"; //return to "/"
 	}
 	
 	@RequestMapping("/apprenant")
-	public String apprenant() {
+	public String apprenant(Model model) {
+		model.addAttribute("listReservationDispo", gestionService.getReservationDispo());
 		return "user/apprenant";
 	}
 	
 	@RequestMapping("/connexionError")
 	public String connexionError(HttpSession httpSession) {
-		httpSession.invalidate(); //déconnection de la session, vider la session
+		httpSession.invalidate(); //dï¿½connection de la session, vider la session
 		return "connexionError"; //return to "/"
 	}
 	

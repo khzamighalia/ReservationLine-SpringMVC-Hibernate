@@ -3,6 +3,7 @@ package com.domaine.controller;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,7 @@ public class AdminController {
 	@RequestMapping("/demandeInscription")
 	public String demandeInscription(Model model) {
 		model.addAttribute("listUser", utilisateurService.getAllApprenantInvalid());
+		model.addAttribute("listRes", gestionService.getReservationDispo());
 		return "admin/demandeInscription";
 	}
 	
@@ -54,18 +56,18 @@ public class AdminController {
 		return "redirect:/admin/demandeInscription";
 	}
 	
-	@RequestMapping("/demandeAcces")
-	public String demandeAcces(Model model) {
-		model.addAttribute("listReserver", gestionService.getReserverProchain());
-		return "admin/demandeAcces";
-	}
-	
-	@RequestMapping(value="/demandeAcces", method = RequestMethod.POST, params = "selectionner")
-	public void selectionnerDemandeAcces(Model model, @RequestParam(name = "id_reserver") Long id_reserver) {
-		model.addAttribute("listDemande", reservationService.getByReserver(gestionService.find(id_reserver)));
-		model.addAttribute("succes", id_reserver);
-		demandeAcces(model);
-	}
+//	@RequestMapping("/demandeAcces")
+//	public String demandeAcces(Model model) {
+//		model.addAttribute("listReserver", gestionService.getReserverProchain());
+//		return "admin/demandeAcces";
+//	}
+//	
+//	@RequestMapping(value="/demandeAcces", method = RequestMethod.POST, params = "selectionner")
+//	public void selectionnerDemandeAcces(Model model, @RequestParam(name = "id_reserver") Long id_reserver) {
+//		model.addAttribute("listDemande", reservationService.getByReserver(gestionService.find(id_reserver)));
+//		model.addAttribute("succes", id_reserver);
+//		demandeAcces(model);
+//	}
 
 	//save gestion reservation
 	@RequestMapping(value = "/registeresrv123", method = RequestMethod.POST)
@@ -77,11 +79,19 @@ public class AdminController {
 				System.out.println(date1);
 				Gestion gestion = new Gestion(date1, nmbr_places);
 				gestionService.create(gestion);
-				model.addAttribute("succes", "l'ajout est terminé avec succès");
-				return "admin/demandeInscription";
+				model.addAttribute("succes", "l'ajout est terminï¿½ avec succï¿½s");
+				return "redirect:/admin/gestionajoutee";
 			} catch (Exception e) {
 				model.addAttribute("erreur", e);
 			}
-		return "admin/demandeInscription";
+		return "redirect:/admin/gestionajoutee";
+	}
+	
+	@RequestMapping("/gestionajoutee")
+	public String gestionajoutee(Model model) {
+		model.addAttribute("listUser", utilisateurService.getAllApprenantInvalid());
+		model.addAttribute("listRes", gestionService.getReservationDispo());
+		return "admin/gestionajoutee";
+
 	}
 }

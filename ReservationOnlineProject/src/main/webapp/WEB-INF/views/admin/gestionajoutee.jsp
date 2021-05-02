@@ -50,8 +50,13 @@
     <br>
 <div class="container">
         <div class="row">
-            <div class="col-4">
+            <div class="col-9">
                     <h2 class="text-danger">Les dates disponibles </h2>
+                        <div class="container" style="padding: 1%;">
+        <div class="text-success" role="alert" style="padding: 2%; ">
+            La date est ajouté avec succés
+        </div>
+    </div>
         <table class="table ">
             <tr>
                 <th> Date </th><th> Places</th>
@@ -114,32 +119,6 @@
         </c:forEach>
         </table>
     </div>
-    
-    
-    
-    <div class="container">
-        <h2 class="text-danger">Demande d'accès</h2>
-        <table class="table ">
-            <tr>
-                <th>Nom Complet</th><th>Date</th>
-            </tr>
-        <c:forEach items="${listDemandeAcces}" var="p">
-            <tr>
-                <td>${p.nom_complet}</td>
-                <td>${p.email}</td>
-                <td><form action="demandeInscription" method="POST">
-                	<input type="hidden" name="id" value="${p.id}">
-                	<button type=submit style="border-radius: 25px; " class="btn btn-primary" name="accepter" > <i class="fas fa-check text-success"></i></button>
-                </form></td>
-                <td><form action="demandeInscription" method="POST">
-                	<input type="hidden" name="id" value="${p.id}">
-                	<button type=submit style="border-radius: 25px; " class="btn btn-primary" name="refuser" ><i class="fas fa-times text-warning"></i></button>
-                </form></td>
-            </tr>
-        </c:forEach>
-        </table>
-    </div>
-    
     
     
 
