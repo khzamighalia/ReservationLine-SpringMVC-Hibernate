@@ -50,7 +50,7 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 
 	@Override
 	public List<Utilisateur> getAllApprenant() {
-		return currentSession().createQuery("from Utilisateur where role = 'user'", Utilisateur.class).list();
+		return currentSession().createQuery("from Utilisateur where active = 1", Utilisateur.class).list();
 	}
 
 	@Override

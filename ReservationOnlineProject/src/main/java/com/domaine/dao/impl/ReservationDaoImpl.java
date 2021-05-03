@@ -1,16 +1,19 @@
 package com.domaine.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.Query;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.domaine.model.Reservation;
-import com.domaine.model.Gestion;
-import com.domaine.model.Utilisateur;
 import com.domaine.dao.ReservationDao;
+import com.domaine.model.Gestion;
+import com.domaine.model.Reservation;
+import com.domaine.model.Utilisateur;
 
 @Repository("reservationDao")
 public class ReservationDaoImpl implements ReservationDao {
@@ -44,12 +47,22 @@ public class ReservationDaoImpl implements ReservationDao {
 
 	@Override
 	public Reservation getByReserverUtilisateur(Gestion gestion, Utilisateur utilisateur) {
-		return currentSession().createQuery("from Gestionresrv where id.reserver = :gestion and id.user=:user" ,Reservation.class).setParameter("reserver", gestion).setParameter("user", utilisateur).uniqueResult();
+		return currentSession().createQuery("from Reservation where id.gestion = :gestion and id.user=:user" ,Reservation.class).setParameter("gestion", gestion).setParameter("user", utilisateur).uniqueResult();
 	}
 
 	@Override
 	public void refuseAllReservation(Gestion gestion) {
 		currentSession().createQuery("UPDATE Gestionresrv SET etat=2 where etat=0 and id.reserver=:reserver").setParameter("reserver", gestion).executeUpdate();
+	}
+
+	@Override
+	public List<Reservation> getAllReservation() {
+		return currentSession().createQuery("FROM Reservation where etat=0", Reservation.class).list();
+	}
+	
+	@Override
+	public List<Reservation> getAllReservations() {
+		return currentSession().createQuery("FROM Reservation", Reservation.class).list();
 	}
 
 }

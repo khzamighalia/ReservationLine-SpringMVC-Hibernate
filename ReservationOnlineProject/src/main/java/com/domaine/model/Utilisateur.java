@@ -1,15 +1,18 @@
 package com.domaine.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 //import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.InheritanceType;
 //import javax.persistence.OneToMany;
 
 @Entity
@@ -32,22 +35,25 @@ public class Utilisateur implements Serializable {
 	@Column(name = "mdp")
 	private String mdp; 
 	
-	@Column(name = "role")
-	private String role;
 	
-	@Column(name = "etat")
-	private Boolean etat;
-    
-
 	private int active;
+//	
+//	
+//	@OneToMany(mappedBy = "utilisateur", cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
+//	private List<Reservation> reservations = new ArrayList<Reservation>();
+
+	@Override
+	public String toString() {
+		return "Utilisateur [id=" + id + ", nom_complet=" + nom_complet + ", email=" + email + ", mdp=" + mdp
+				+ ", active=" + active;
+	}
 
 	public Utilisateur(String nom_complet, String email, String mdp) {
 		super();
 		this.nom_complet = nom_complet;
 		this.email = email;
 		this.mdp = mdp;
-		this.role = "user";
-	}
+		this.active = 0;	}
 
 	public Utilisateur() {
 		super();
@@ -83,13 +89,6 @@ public class Utilisateur implements Serializable {
 
 	public void setMdp(String mdp) {
 		this.mdp = mdp;
-	}
-	public String getRole() {
-		return role;
-	}
-
-	public void setRole(String role) {
-		this.role = role;
 	}
 
 	public int getActive() {

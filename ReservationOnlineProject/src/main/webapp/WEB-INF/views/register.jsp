@@ -33,7 +33,7 @@
                         <div class="btn-group btn-group-toggle" data-toggle="buttons">
                             <label class="btn btn-light active">
                                 <input type="radio" name="options"
-                                    style="border-radius: 1.5em; border-color: black;" id="option1"
+                                    style=" border-color: black;" id="option1"
                                     onclick="location.href='${pageContext.request.contextPath}/connexion'"> Se connecter
                             </label>
                             <label class="btn btn-danger">
@@ -69,7 +69,7 @@
                                 </div>
               
                                 <button type="submit" name="Inscription" class="btn btn-outline-danger"
-                                    style="  padding:8px 25px; margin-left: 150px; border-radius: 2em;">S'inscrire</button>
+                  >S'inscrire</button>
                         </form>
                     </div>
                 </div>

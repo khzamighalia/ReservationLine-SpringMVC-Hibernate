@@ -1,5 +1,7 @@
 package com.domaine.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.mindrot.jbcrypt.BCrypt;
@@ -11,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.domaine.model.Reservation;
 import com.domaine.model.Utilisateur;
 import com.domaine.model.UtilisateurConnection;
 import com.domaine.service.GestionService;
+import com.domaine.service.ReservationService;
 import com.domaine.service.UtilisateurService;
 
 
@@ -25,6 +29,9 @@ public class Controller {
 	
 	@Autowired
 	private GestionService gestionService;
+	
+	@Autowired
+	private ReservationService reservationService;
 
 	@GetMapping("/")
 	private String index() {
@@ -40,12 +47,12 @@ public class Controller {
 	public String inscriptionAprenant(Model model, @RequestParam(name = "nom") String nom ,@RequestParam(name = "email") String email, @RequestParam(name = "mdp") String mdp) {
 		Utilisateur user = utilisateurService.findByEmail(email);
 		if(user != null) {
-			model.addAttribute("erreur", "l'email existe d�j�");
+			model.addAttribute("erreur", "l'email existe déjà");
 		} else {
 			try {
 				Utilisateur utilisateur = new Utilisateur(nom, email, BCrypt.hashpw(mdp, BCrypt.gensalt()));
 				utilisateurService.create(utilisateur);
-				model.addAttribute("succes", "l'inscription est termin� avec succ�s");
+				model.addAttribute("succes", "l'inscription est termin� avec succès");
 				return "connexion";
 			} catch (Exception e) {
 				model.addAttribute("erreur", e);
@@ -68,7 +75,7 @@ public class Controller {
 				httpSession.setAttribute("logged", utilisateur);
 				return "redirect:/apprenant";
 			} else if (utilisateur.getActive() == 0) {
-				model.addAttribute("erreur", "Votre demande d'inscription n'a pas encore �t� accept�e");
+				model.addAttribute("erreur", "Votre demande d'inscription n'a pas encore été acceptée");
 				return "connexionAtt";
 			} else if (utilisateur.getActive() == 2) {
 				model.addAttribute("erreur", "Votre demande d'inscription a �t� rejet�e");
@@ -103,6 +110,17 @@ public class Controller {
 		httpSession.invalidate(); //d�connection de la session, vider la session
 		return "connexionError"; //return to "/"
 	}
+	
+	
+	@RequestMapping("/getAll")
+	public String getAll() {
+		List<Reservation> a = reservationService.getAllReservations();
+		for(Reservation res : a) {
+			System.out.println(res.toString());
+		}
+		return "connexionError";
+	}
+	
 	
 	
 	

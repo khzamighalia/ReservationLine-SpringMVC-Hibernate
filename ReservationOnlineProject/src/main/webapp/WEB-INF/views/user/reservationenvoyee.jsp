@@ -32,21 +32,15 @@
 
 <body style="font-family: 'Montserrat', sans-serif;">
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">                <img src="./resources/img/logo.png" style="width: 180px"></img>
+  <a class="navbar-brand" href="#">               <img src="./resources/img/logo.png" style="width: 180px"></img>
 </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="nav navbar-nav ml-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="${pageContext.servletContext.contextPath}/"> Accueil <span class="sr-only">(current)</span></a>
-      </li>
       <li class="nav-item">
-        <a class="nav-link" href="${pageContext.servletContext.contextPath}/admin/demandeAcces">Reservation</a>
-      </li>
-      <li class="nav-item">
-      <button type="button" class="btn btn-outline-danger text-danger"><a class="nav-link" href="${pageContext.servletContext.contextPath}/admin/demandeAcces">S'inscrire</a>
+      <button type="button" class="btn btn-outline-danger text-danger"><a class="nav-link" href="${pageContext.servletContext.contextPath}/deconnexion">Se déconnecter</a>
       </button> 
         </li>
 
@@ -74,7 +68,7 @@
             <tr>
                 <td>${p.date}</td>
                 <td>${p.nmbr_places}</td>
-                <td><form action="user/demandeAcces" method="POST">
+                <td><form action="demandeAcces" method="POST">
                 	<input type="hidden" name="id_gest" value="${p.id_gest}">
                 	<button type=submit style="border-radius: 25px; " class="btn btn-primary" name="res" > Réserver </button>
                 </form></td>
@@ -84,76 +78,6 @@
             </div>
 
     </div>
-
-
-    <div class="container">
-        <h2 class="text-danger">Historique des réservations</h2>
-    <table class="table">
-        <tr>
-            <th>Description</th><th>Date</th>
-        </tr>
-    <c:forEach items="${model.produits}" var="p">
-        <tr>
-            <td>${p.description}</td>
-            <td>${p.date}</td>
-            <td><button onclick="document.location='supprimer.do?id=${p.id}'" style="border-radius: 25px; " class="btn btn-primary" >Supprimer</button></td>
-        </tr>
-    </c:forEach>
-    </table>
-    <c:if test="${! empty listDemande }">
-			<table class="table table-striped mt-5">
-				<thead>
-					<tr>
-						<th scope="col">date demande</th>
-						<th scope="col">état de demande</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach var="demande" items="${listDemande}">
-						<tr>
-							<th scope="row"><fmt:formatDate type = "date" value = "${demande.id.gestion.date}" /></th>
-							<td>
-								<c:choose>
-									<c:when test="${ demande.etat == 0 }">en attente</c:when>
-									<c:when test="${ demande.etat == 1 }">approuvée</c:when>
-									<c:otherwise>rejetée</c:otherwise>
-								</c:choose>
-							</td>
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-		</c:if>
-        
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

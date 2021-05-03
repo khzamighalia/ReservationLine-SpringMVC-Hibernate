@@ -56,4 +56,19 @@ public class ReservationServiceImpl implements ReservationService {
 		reservationDao.refuseAllReservation(gestion);
 	}
 
+	
+	@Transactional
+	@Override
+	public List<Reservation> getAllReservation() {
+		return reservationDao.getAllReservation();
+	}
+	
+	@Transactional
+	@Override
+	public List<Reservation> getAllReservations() {
+		return reservationDao.getAllReservations();
+	}
+
+	
+	
 }

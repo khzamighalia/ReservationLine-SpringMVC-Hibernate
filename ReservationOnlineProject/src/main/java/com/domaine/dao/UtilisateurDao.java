@@ -2,9 +2,13 @@ package com.domaine.dao;
 
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import com.domaine.model.Utilisateur;
 import com.domaine.model.UtilisateurConnection;
 
+
+@Repository
 public interface UtilisateurDao {
 	public void create(Utilisateur User);
 	public void update(Utilisateur User);

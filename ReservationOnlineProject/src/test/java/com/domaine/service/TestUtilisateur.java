@@ -20,7 +20,7 @@ public class TestUtilisateur {
 
 	@Autowired
 	UtilisateurService utilisateurService;
-
+	
 	@Test
 	public void findByEmailTest() {
 		Utilisateur user = utilisateurService.findByEmail("admin@gmail.com");
@@ -28,7 +28,7 @@ public class TestUtilisateur {
 	}
 	@Test
 	public void findTest() {
-		Utilisateur user = utilisateurService.find(7L);
+		Utilisateur user = utilisateurService.find(29L);
 		assertNotNull(user);
 	}
 	
@@ -36,14 +36,14 @@ public class TestUtilisateur {
 	public void loginTest() {
 		Utilisateur user = utilisateurService.login(new UtilisateurConnection("admin@gmail.com", "admin"));
 		assertNotNull(user);
-		assertEquals("user", user.getRole());
+		assertEquals(3, user.getActive());
 	}
 	
 	@Test
 	public void getAllApprenantTest() {
 		List<Utilisateur> list = utilisateurService.getAllApprenant();
 		assertNotNull(list);
-		assertEquals("user", list.get(1).getRole());
+		assertEquals(1, list.get(0).getActive());
 	}
 
 	

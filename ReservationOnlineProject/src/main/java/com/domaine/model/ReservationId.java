@@ -14,6 +14,10 @@ public class ReservationId implements Serializable {
 	@JoinColumn(name="gestion_id")
 	private Gestion gestion;
 	
+	@Override
+	public String toString() {
+		return "ReservationId [user=" + user + ", gestion=" + gestion + "]";
+	}
 	public ReservationId(Utilisateur user, Gestion gestion) {
 		super();
 		this.user = user;

@@ -19,18 +19,9 @@ public class Reservation {
 	@EmbeddedId
 	private ReservationId id;
 		
-	@Column(name = "description")
-	private String description; 
-	
-	
 	@Column(name = "etat")
 	private int etat;
-
-	/*@ManyToOne
-	@JoinColumn(name = "id")
-    private User user;
-	*/
-		
+	
 	public Reservation(ReservationId id, Date date, int etat) {
 		super();
 		this.id = id;
@@ -45,12 +36,7 @@ public class Reservation {
 	public void setId(ReservationId id) {
 		this.id = id;
 	}
-	public String getDescription() {
-		return description;
-	}
-	public void setDescription(String description) {
-		this.description = description;
-	}
+	
 	public int getEtat() {
 		return etat;
 	}

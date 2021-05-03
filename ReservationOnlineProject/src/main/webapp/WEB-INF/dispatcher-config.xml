@@ -13,10 +13,10 @@
 	http://www.springframework.org/schema/tx/spring-tx.xsd
 	">
 	<context:property-placeholder location="classpath:database.properties"/>
-	<context:component-scan base-package="com.domaine.model" />
-	<context:component-scan base-package="com.domaine.controller" />
+	<context:component-scan base-package="com.domaine.*" />
+	<!-- <context:component-scan base-package="com.domaine.controller" />
 	<context:component-scan base-package="com.domaine.dao.impl" />
-	<context:component-scan base-package="com.domaine.service.impl" />
+	<context:component-scan base-package="com.domaine.service.impl" /> -->
   
 	<mvc:annotation-driven />
 <mvc:resources mapping="/resources/**" location="/WEB-INF/resources/" />

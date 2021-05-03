@@ -13,4 +13,6 @@ public interface ReservationService {
 	public List<Reservation> getByReserver(Gestion gestion);
 	public Reservation getByReserverUtilisateur(Gestion gestion, Utilisateur utilisateur);
 	public void refuseAllReservation(Gestion gestion);
+	public List<Reservation> getAllReservation();
+	public List<Reservation> getAllReservations();
 }

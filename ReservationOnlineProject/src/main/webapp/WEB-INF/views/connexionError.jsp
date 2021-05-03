@@ -19,30 +19,29 @@
     <title>S'inscrire</title>
 </head>
 
-<body style="font-family: 'Montserrat', sans-serif; ">
-
-
-	
-    <div class="container" style="padding: 0%;">
+<body>
+<br>
+<br>
+<br>
+    <div class="container">
         <div class="row">
-            <div class="col-sm" style="padding: 6%; margin-left: -160px; ">
-                <div class="col-sm border" style="padding: 15%;">
+            <div class="col-sm">
+                <div class="col-sm border">
                     <div class="form-group ">
-                        <div class="btn-group btn-group-toggle" data-toggle="buttons"> 
-                            <label class="btn btn-primary">
-                                <input type="radio" name="options" id="option2"> Se connecter
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <label class="btn btn-danger">
+                                <input type="radio" name="options" id="option2" onclick="location.href='${pageContext.request.contextPath}/connexion'"> Se connecter
                             </label>
                             <label class="btn btn-light active">
                                 <input type="radio" name="options"
-                                    style="border-radius: 1.5em; border-color: black; width: 150px ;" id="option1"
-                                    onclick="'${pageContext.request.contextPath}/register'"> S'inscrire
+                                    style=" border-color: black;" id="option1"
+                                   onclick="location.href='${pageContext.request.contextPath}/register'"> S'inscrire
                             </label>
                         </div>
-                        <form action="connexion" method="post" style="align-content: center;">
-                            <div class="text-danger" role="alert">
-  					Votre demande d'inscription a été rejetée
-				</div>
-                            <div class="form-group">
+                        <form action="connexion" method="post">
+              <div class="text-danger" role="alert">
+  					Votre demande d'inscription a été rejetée ! 
+				</div>                            <div class="form-group">
                                 <label for="exampleInputEmail1">Email :</label>
                                 <input type="email" name="email" class="form-control" id="exampleInputEmail1"
                                     style="background-color: #E8EFF6; border-color: transparent;"
@@ -52,26 +51,18 @@
                                     <input type="password" name="mdp" class="form-control" id="exampleInputPassword1"
                                         style="background-color: #E8EFF6; border-color: transparent;">
                                 </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                    <label class="form-check-label" for="flexCheckDefault" style="font-size: 10px;">
-                                        I accept to share my data with us. I acknowledge that the
-                                        collection and use of my personal data will follow
-                                        the treatment as described on their privacy policies
-                                    </label>
-                                </div>
-                                <button type="submit" name="Inscription" class="btn btn-primary"
-                                    style="  padding:8px 25px; margin-left: 150px; border-radius: 2em;">Se connecter</button>
+                               
+                                <button type="submit" name="Inscription" class="btn btn-outline-danger"
+>Se connecter</button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-
+       
     </div>
     </div>
-
-
+    
 
 
 </body>

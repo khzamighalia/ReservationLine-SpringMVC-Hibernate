@@ -29,16 +29,16 @@
                 <div class="col-sm border">
                     <div class="form-group ">
                         <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                            <label class="btn btn-danger" style="width : 250px;margin-left : -15px">
+                            <label class="btn btn-danger">
                                 <input type="radio" name="options" id="option2" onclick="location.href='${pageContext.request.contextPath}/connexion'"> Se connecter
                             </label>
                             <label class="btn btn-light active">
                                 <input type="radio" name="options"
-                                    style="border-radius: 1.5em; border-color: black;" id="option1"
+                                    style=" border-color: black;" id="option1"
                                    onclick="location.href='${pageContext.request.contextPath}/register'"> S'inscrire
                             </label>
                         </div>
-                        <form action="connexion" method="post" style="align-content: center;">
+                        <form action="connexion" method="post">
                             <p>Si vous n'avez pas de compte, Inscrivez vous </p>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Email :</label>
